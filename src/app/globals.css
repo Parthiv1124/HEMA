@@ -1,0 +1,203 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/*
+ * ═══════════════════════════════════════════
+ *  HEMA PHARMACEUTICALS — DESIGN TOKEN SYSTEM
+ *  Tailwind CSS v4 · @theme directive
+ * ═══════════════════════════════════════════
+ */
+
+@theme {
+  /* ─── PRIMARY BRAND (Teal-Blue) ─── */
+  --color-brand-50: #e6f5fa;
+  --color-brand-100: #ccebf5;
+  --color-brand-200: #99d1ea;
+  --color-brand-300: #66badf;
+  --color-brand-400: #33a3d4;
+  --color-brand-500: #008cc9;
+  --color-brand-600: #007ab3;
+  --color-brand-700: #006a9e;
+  --color-brand-800: #005a88;
+  --color-brand-900: #004a72;
+
+  /* ─── DEEP NAVY (Dark sections, hero) ─── */
+  --color-navy-500: #006ba0;
+  --color-navy-600: #005a88;
+  --color-navy-700: #004870;
+  --color-navy-800: #003858;
+  --color-navy-900: #008cc9;
+  --color-navy-950: #001829;
+
+  /* ─── DEEP OCEAN (for dark sections/backgrounds) ─── */
+  --color-ocean-800: #004e7a;
+  --color-ocean-900: #003d5c;
+  --color-ocean-950: #001829;
+
+  /* ─── ACCENT GOLD ─── */
+  --color-gold-400: #FCD34D;
+  --color-gold-500: #FBBF24;
+  --color-gold-600: #D97706;
+
+  /* ─── SEMANTIC ─── */
+  --color-success: #16A34A;
+  --color-warning: #F59E0B;
+  --color-error: #DC2626;
+  --color-surface: #FFFFFF;
+
+  /* ─── TYPOGRAPHY ─── */
+  --font-sans: var(--font-montserrat), system-ui, -apple-system, sans-serif;
+
+  /* ─── MOTION ─── */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 600ms;
+  --duration-slower: 1000ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/*
+ * ─── GRADIENT CSS CUSTOM PROPERTIES ───
+ * (Not expressible via @theme, so defined as regular custom props)
+ */
+:root {
+  --gradient-hero: linear-gradient(135deg, #1e40af 0%, #0369a1 40%, #0ea5e9 100%);
+  --gradient-dark: linear-gradient(180deg, #0369a1 0%, #1e40af 100%);
+  --gradient-cta: linear-gradient(90deg, #0284c7 0%, #0369a1 100%);
+  --gradient-light: linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 100%);
+  --gradient-gold: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
+}
+
+/*
+ * ─── BASE LAYER ───
+ */
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+
+  body {
+    @apply bg-white text-gray-900 antialiased;
+  }
+
+  /* Smooth scroll */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus visible ring for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-brand-500;
+  }
+
+  /* Selection color */
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
+}
+
+/*
+ * ─── UTILITY CLASSES ───
+ */
+@utility gradient-hero {
+  background: var(--gradient-hero);
+}
+
+@utility gradient-dark {
+  background: var(--gradient-dark);
+}
+
+@utility gradient-cta {
+  background: var(--gradient-cta);
+}
+
+@utility gradient-light {
+  background: var(--gradient-light);
+}
+
+@utility gradient-gold {
+  background: var(--gradient-gold);
+}
+
+/* ─── LIQUID GLASS UTILITIES (light theme) ─── */
+@utility glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 24px rgba(14, 64, 143, 0.07);
+}
+
+@utility glass-dark {
+  background: rgba(30, 64, 175, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(30, 64, 175, 0.15);
+}
+
+@utility glass-brand {
+  background: rgba(2, 132, 199, 0.08);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 32px rgba(14, 64, 143, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+@utility glass-light {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+@utility glass-hero {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/*
+ * ─── MARQUEE ANIMATIONS ───
+ */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 60s linear infinite;
+}
+
+@utility animate-marquee-reverse {
+  animation: marquee-reverse 60s linear infinite;
+}
