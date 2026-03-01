@@ -52,3 +52,11 @@ Thumbs.db
 .env.local
 .env.development
 .env.production
+
+# Claude / AI local configs
+.claude/
+CLAUDE.md
+.mcp.json
+
+# Random temp files
+*.png
