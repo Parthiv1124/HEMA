@@ -4,6 +4,49 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform, useInView, MotionValue } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
 
+/* Translucent yellow hexagon node */
+function HexNode({ small = false }: { small?: boolean }) {
+  const size = small ? 30 : 44
+  const cx = size / 2
+  const cy = size / 2
+  const r = small ? 12 : 18
+
+  const pts = (radius: number) =>
+    Array.from({ length: 6 }, (_, i) => {
+      const a = (Math.PI / 3) * i - Math.PI / 2
+      return `${(cx + radius * Math.cos(a)).toFixed(1)},${(cy + radius * Math.sin(a)).toFixed(1)}`
+    }).join(' ')
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      style={{ filter: 'drop-shadow(0 0 5px rgba(251,191,36,0.55))', overflow: 'visible' }}
+    >
+      {/* Outer halo ring */}
+      <polygon
+        points={pts(r + 5)}
+        fill="rgba(251,191,36,0.06)"
+        stroke="rgba(251,191,36,0.22)"
+        strokeWidth="1"
+      />
+      {/* Main hexagon — translucent yellow */}
+      <polygon
+        points={pts(r)}
+        fill="rgba(251,191,36,0.18)"
+        stroke="rgba(251,191,36,0.85)"
+        strokeWidth="1.75"
+      />
+      {/* Inner hex dot */}
+      <polygon
+        points={pts(r * 0.32)}
+        fill="rgba(251,191,36,0.9)"
+      />
+    </svg>
+  )
+}
+
 const milestones = [
   { year: 2012, description: 'Embarked on the production of API intermediates' },
   { year: 2015, description: 'Proudly began production of Active Pharmaceutical Ingredients' },
@@ -46,12 +89,9 @@ function DesktopTimeline({ scrollYProgress }: { scrollYProgress: MotionValue<num
               {i < milestones.length - 1 && (
                 <div className="absolute top-5 left-[calc(50%+20px)] h-0.5 w-[calc(260px-8px)] bg-brand-100" />
               )}
-              {/* Node dot */}
-              <div
-                className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 border-brand-400 bg-white"
-                style={{ boxShadow: '0 0 0 4px rgba(2,132,199,0.12)' }}
-              >
-                <div className="h-2 w-2 rounded-full bg-brand-500" />
+              {/* Hex node */}
+              <div className="relative z-10 flex items-center justify-center">
+                <HexNode />
               </div>
               {/* Year + Description card */}
               <div
@@ -93,11 +133,8 @@ function MobileNode({ milestone, index }: { milestone: typeof milestones[0]; ind
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div
-        className="absolute -left-5 top-1 flex h-6 w-6 items-center justify-center rounded-full border-2 border-brand-400 bg-white"
-        style={{ boxShadow: '0 0 0 4px rgba(2,132,199,0.12)' }}
-      >
-        <div className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+      <div className="absolute -left-[19px] top-0 flex items-center justify-center">
+        <HexNode small />
       </div>
       <div
         className="mt-1 rounded-xl px-4 py-3 bg-white/60 backdrop-blur-md border border-white/80"
