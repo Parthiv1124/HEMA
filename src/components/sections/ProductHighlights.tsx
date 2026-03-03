@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
-import { Pill, ShieldCheck, Atom, FlaskConical, ArrowRight } from 'lucide-react'
+import { Pill, Syringe, Atom, FlaskConical, ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { Button } from '@/components/ui/Button'
 
@@ -18,7 +18,7 @@ const categories = [
   {
     title: 'Sterile APIs',
     count: 'Injectable Grade',
-    icon: ShieldCheck,
+    icon: Syringe,
     description: 'Highest purity sterile manufacturing',
     href: '/products?category=sterile-api',
   },

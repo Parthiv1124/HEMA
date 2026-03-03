@@ -112,8 +112,9 @@ function DesktopTimeline({ scrollYProgress }: { scrollYProgress: MotionValue<num
 /* --- Mobile: Vertical timeline --- */
 function MobileTimeline() {
   return (
-    <div className="relative pl-8 lg:hidden">
-      <div className="absolute top-0 bottom-0 left-3 w-0.5 bg-brand-100" />
+    <div className="relative lg:hidden">
+      {/* Vertical line centred on the hex (hex is 30px wide → centre at 15px) */}
+      <div className="absolute top-0 bottom-0 left-[14px] w-0.5 bg-brand-100" />
       {milestones.map((m, i) => (
         <MobileNode key={m.year} milestone={m} index={i} />
       ))}
@@ -128,16 +129,18 @@ function MobileNode({ milestone, index }: { milestone: typeof milestones[0]; ind
   return (
     <motion.div
       ref={ref}
-      className="relative pb-10 last:pb-0"
+      className="relative flex items-start gap-3 pb-10 last:pb-0"
       initial={{ opacity: 0, x: -20 }}
       animate={inView ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="absolute -left-[19px] top-0 flex items-center justify-center">
+      {/* Hex node — in-flow, never overlaps card */}
+      <div className="relative z-10 shrink-0">
         <HexNode small />
       </div>
+      {/* Card */}
       <div
-        className="mt-1 rounded-xl px-4 py-3 bg-white/60 backdrop-blur-md border border-white/80"
+        className="flex-1 rounded-xl px-4 py-3 bg-white/60 backdrop-blur-md border border-white/80"
         style={{ boxShadow: '0 2px 12px rgba(14,64,143,0.06)' }}
       >
         <span className="text-xl font-bold text-[#0c2d6b]">{milestone.year}</span>

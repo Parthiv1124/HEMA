@@ -5,14 +5,14 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { Menu, X, ChevronDown, Pill, FlaskConical, TestTubes, Microscope } from 'lucide-react'
+import { Menu, X, ChevronDown, Pill, Syringe, TestTubes, Microscope } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { mainNavigation } from '@/data/navigation'
 import { Button } from '@/components/ui/Button'
 
 const categoryIcons = [
   { icon: Pill, color: 'text-brand-400' },
-  { icon: FlaskConical, color: 'text-emerald-400' },
+  { icon: Syringe, color: 'text-emerald-400' },
   { icon: TestTubes, color: 'text-amber-400' },
   { icon: Microscope, color: 'text-purple-400' },
 ]
